@@ -1,0 +1,13 @@
+train: /home/neosoft/Documents/GitHub/Data_Science_Training/Task_4/OCR_YOLO_EXPERIMENTS/pancard-test/pancard_images/train/images
+val: /home/neosoft/Documents/GitHub/Data_Science_Training/Task_4/OCR_YOLO_EXPERIMENTS/pancard-test/pancard_images/valid/images
+test: /home/neosoft/Documents/GitHub/Data_Science_Training/Task_4/OCR_YOLO_EXPERIMENTS/pancard-test/pancard_images/test/images
+
+nc: 4
+names: ['date', 'name', 'pan_number', 'photo']
+
+roboflow:
+  workspace: jainam-chhadwa
+  project: pan-card-7nydd
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/jainam-chhadwa/pan-card-7nydd/dataset/1
