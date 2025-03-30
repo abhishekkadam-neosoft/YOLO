@@ -1,0 +1,7 @@
+train: C:\Project\YOLO\Pan_Card_Text_Extractor\Pancard_200\train\images
+val: C:\Project\YOLO\Pan_Card_Text_Extractor\Pancard_200\val\images
+test: C:\Project\YOLO\Pan_Card_Text_Extractor\Pancard_200\test\images
+
+nc: 6
+names: ['Name', 'Fathers Name', 'pan number', 'dob', 'photo', 'signature']
+
