@@ -6,7 +6,7 @@ from PIL import Image
 import numpy as np
 
 # Load the trained YOLO model
-model = YOLO("runs/detect/train6/weights/best.pt")
+model = YOLO("runs/detect/train8/weights/best.pt")
 
 def detect_objects(frame):
     results = model(frame)
