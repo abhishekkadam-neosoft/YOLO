@@ -1,6 +1,6 @@
-train: /content/drive/MyDrive/Pan_Card_Data_Extractor/Pancard_300/train/images_augmented
-val: /content/drive/MyDrive/Pan_Card_Data_Extractor/Pancard_300/val/images_augmented
-test: /content/drive/MyDrive/Pan_Card_Data_Extractor/Pancard_300/test/images
+train: C:\Project\YOLO\Pan_Card_Text_Extractor\Pancard_300\train\images
+val: C:\Project\YOLO\Pan_Card_Text_Extractor\Pancard_300\val\images
+test: C:\Project\YOLO\Pan_Card_Text_Extractor\Pancard_300\test\images
 
 nc: 6
 names: ['Name', 'Fathers Name', 'pan number', 'dob', 'photo', 'signature']
