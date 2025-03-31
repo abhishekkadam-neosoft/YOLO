@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAN Card Auto-Fill</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h2>PAN Card Auto-Fill System</h2>
+
+    <!-- Image Upload -->
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="imageInput" accept="image/*" required>
+        <button type="button" onclick="uploadImage()">Upload & Extract</button>
+    </form>
+
+    <!-- Auto-filled Form -->
+    <form id="panForm">
+        <label>Name:</label>
+        <input type="text" id="name" name="name"><br>
+
+        <label>Father's Name:</label>
+        <input type="text" id="father_name" name="father_name"><br>
+
+        <label>DOB:</label>
+        <input type="text" id="dob" name="dob"><br>
+
+        <label>PAN Number:</label>
+        <input type="text" id="pan_number" name="pan_number"><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        async function uploadImage() {
+            let fileInput = document.getElementById("imageInput");
+            if (!fileInput.files[0]) {
+                alert("Please select an image first.");
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("image", fileInput.files[0]);
+
+            let response = await fetch("/extract", {
+                method: "POST",
+                body: formData,
+            });
+
+            let data = await response.json();
+
+            if (data.error) {
+                alert("Error: " + data.error);
+                return;
+            }
+
+            // Auto-fill form fields with extracted text
+            document.getElementById("name").value = data.name || "";
+            document.getElementById("father_name").value = data.fathers_name || "";
+            document.getElementById("dob").value = data.dob || "";
+            document.getElementById("pan_number").value = data.pan_number || "";
+        }
+    </script>
+</body>
+</html>
