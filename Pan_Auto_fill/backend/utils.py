@@ -1,8 +1,12 @@
 import cv2
 import pytesseract
 
-# Set the full path to the Tesseract executable
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+# Set the full path to the Tesseract executable(Linux)
+pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
+
+
+# # Set the full path to the Tesseract executable(Windows)
+# pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 def extract_text_from_image(cropped_image):
     gray = cv2.cvtColor(cropped_image, cv2.COLOR_BGR2GRAY)
