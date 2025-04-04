@@ -11,12 +11,6 @@ This project automates the extraction of key fields from Indian PAN (Permanent A
 - [Solution Architecture](#solution-architecture)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
-- [How It Works](#how-it-works)
-- [Results](#results)
-- [Future Work](#future-work)
-- [Contributors](#contributors)
 
 ---
 
@@ -34,14 +28,6 @@ Manual entry of PAN card details into forms is prone to human error and is ineff
 
 ---
 
-## ✅ Solution Architecture
-
-```mermaid
-graph TD;
-    A[Input PAN Card Image] --> B[YOLOv11 Model - Detect Fields];
-    B --> C[Pytesseract OCR];
-    C --> D[Extracted Text];
-    D --> E[Auto-Fill Web Form];
     
 ## ✨ Features
 
