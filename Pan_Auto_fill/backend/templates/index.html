@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +13,12 @@
             margin: 0;
             padding: 0;
         }
+
         h2 {
             margin-top: 20px;
             color: #333;
         }
+
         form {
             background: white;
             max-width: 400px;
@@ -24,7 +27,10 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        input[type="file"], input[type="text"], button {
+
+        input[type="file"],
+        input[type="text"],
+        button {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -32,9 +38,11 @@
             border: 1px solid #ccc;
             box-sizing: border-box;
         }
+
         input[type="file"] {
             border: none;
         }
+
         button {
             background-color: #007bff;
             color: white;
@@ -42,11 +50,13 @@
             cursor: pointer;
             font-size: 16px;
         }
+
         button:hover {
             background-color: #0056b3;
         }
     </style>
 </head>
+
 <body>
     <h2>PAN Card Auto-Fill System</h2>
 
@@ -58,17 +68,17 @@
 
     <!-- Auto-filled Form -->
     <form id="panForm">
-        <label>Name:</label>
-        <input type="text" id="name" name="name">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" autocomplete="name" required>
 
-        <label>Father's Name:</label>
-        <input type="text" id="fathers_name" name="fathers_name">
+        <label for="fathers_name">Father's Name:</label>
+        <input type="text" id="fathers_name" name="fathers_name" autocomplete="additional-name" required>
 
-        <label>DOB:</label>
-        <input type="text" id="dob" name="dob">
+        <label for="dob">Date of Birth:</label>
+        <input type="text" id="dob" name="dob" autocomplete="bday" required>
 
-        <label>PAN Number:</label>
-        <input type="text" id="pan_number" name="pan_number">
+        <label for="pan_number">PAN Number:</label>
+        <input type="text" id="pan_number" name="pan_number" autocomplete="cc-number" required>
 
         <button type="submit">Submit</button>
     </form>
@@ -97,11 +107,43 @@
             }
 
             // Auto-fill form fields with extracted text
-            document.getElementById("name").value = data.name || "";
-            document.getElementById("fathers_name").value = data.fathers_name || "";
-            document.getElementById("dob").value = data.dob || "";
-            document.getElementById("pan_number").value = data.pan_number || "";
+            document.getElementById("name").value = data.data.name || "";
+            document.getElementById("fathers_name").value = data.data.fathers_name || "";
+            document.getElementById("dob").value = data.data.dob || "";
+            document.getElementById("pan_number").value = data.data.pan_number || "";
         }
+
+        document.getElementById("panForm").addEventListener("submit", async function (event) {
+            event.preventDefault();  // Prevent page reload on form submission
+
+            let formData = {
+                name: document.getElementById("name").value,
+                fathers_name: document.getElementById("fathers_name").value,
+                dob: document.getElementById("dob").value,
+                pan_number: document.getElementById("pan_number").value
+            };
+
+            console.log("Submitting Form Data:", formData); // Debugging
+
+            let response = await fetch("/submit", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            });
+
+            let result = await response.json();
+            console.log("Server Response:", result); // Debugging
+
+            if (result && result.success) {
+                alert("✅ Your details have been successfully submitted!");
+                document.getElementById("panForm").reset();
+            } else {
+                alert("❌ Submission failed: " + (result.error || "Unknown error"));
+            }
+
+        });
     </script>
+
 </body>
+
 </html>
