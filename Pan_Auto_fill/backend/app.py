@@ -33,18 +33,18 @@ def save_to_database(data):
         """
         values = (data.get("name"), data.get("fathers_name"), data.get("dob"), data.get("pan_number"))
 
-        print("🔥 Executing SQL Query:", sql)  # Debugging
-        print("✅ With Values:", values)  # Debugging
+        print("Executing SQL Query:", sql)  
+        print("With Values:", values) 
 
         cursor.execute(sql, values)
         conn.commit()
 
         cursor.close()
         conn.close()
-        print("✅ Data inserted successfully!")  # Debugging
+        print("Data inserted successfully!")  
         return True
     except Exception as e:
-        print("❌ Database Error:", e)  # Debugging
+        print("Database Error:", e)  
         return False
     
 
@@ -85,7 +85,7 @@ def extract_information():
 def submit_information():
     """Saves extracted information into MySQL when the user submits the form."""
     form_data = request.json
-    print("🔥 Received Form Data:", form_data)  # Debugging
+    print("Received Form Data:", form_data)  # Debugging
 
     if not form_data:
         return jsonify({"error": "No data received"}), 400
@@ -93,9 +93,9 @@ def submit_information():
     success = save_to_database(form_data)
 
     if success:
-        return jsonify({"message": "✅ Data successfully stored in database!"})
+        return jsonify({"message": "Data successfully stored in database!"})
     else:
-        return jsonify({"error": "❌ Failed to save data"}), 500
+        return jsonify({"error": "Failed to save data"}), 500
 
 
 
